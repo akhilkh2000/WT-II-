@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Iframe method</title>
+	</head>
+	<body>
+		<form action="hiddenFrames.php" method="POST" target="helper">
+			<label>USERNAME:</label>
+			<input type="text" id="username" name="uid" />
+			<br />
+			<label>PASSWORD:</label>
+			<input type="text" name="pwd" id="password" />
+			<input type="submit" name="" id="" />
+			<iframe
+				id="helper"
+				name="helper"
+				width="100"
+				height="100"
+				style="display: none;"
+			></iframe>
+		</form>
+		<script src="index.js"></script>
+	</body>
+</html>
