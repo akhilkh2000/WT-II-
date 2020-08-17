@@ -1,4 +1,4 @@
-let obj = {
+var obj = {
 	getElectives: function () {
 		let dep = document.getElementById("dept");
 		if (!dep.value) {
@@ -12,6 +12,7 @@ let obj = {
 	populateElectives: function (electives) {
 		//the string returned by the server is ';' is seperated
 		//the 0th index is the dept name
+		console.log(electives);
 		let returnedArray = electives.split(";");
 		document.getElementById("dept").value = returnedArray[0];
 		//loop through electives

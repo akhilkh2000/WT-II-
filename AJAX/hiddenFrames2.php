@@ -1,4 +1,6 @@
 <html>
+
+
 <script>
     <?php
     extract($_GET);
@@ -6,7 +8,7 @@
     //extracting line by line
     while ($line = fgets($file)) {
         $modline = trim($line); // remove extra spaces chars
-        $arr = explode(';', $modline); // as it is seperated by ;
+        $arr = explode(";", $modline); // as it is seperated by ;
         $found = false;
         if ($dept == $arr[0]) {
             $found = true;
@@ -20,5 +22,6 @@
 
     ?>
 </script>
+
 
 </html>
