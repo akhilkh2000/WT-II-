@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<script>
+		var obj = {
+			xhr: new XMLHttpRequest(),
+			async: function () {
+				let pname = document.getElementById("pid");
+				this.xhr.onreadystatechange = this.update;
+				this.xhr.open("GET", "xhr.php?pid=" + pid.value, true);
+				this.xhr.send();
+			},
+			update: function () {
+				if (this.readyState == 4 && this.status == 200) {
+					//
+					let res = this.responseText;
+					document.getElementById("sym").value = res;
+				}
+			},
+		};
+	</script>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		Pandemic Name : <input type="text" id="pid" onblur="obj.async()" />
+		<p></p>
+		Symptoms : <input type="text" name="" id="sym" />
+	</body>
+</html>

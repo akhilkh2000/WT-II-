@@ -1,0 +1,36 @@
+- XML , JSON
+Both used to transport data formats 
+Adv of XML - supported by many languages , supports UTF-8 encoding , 
+
+-Basic XML structure
+-User defined tags , case sensitive tags
+-nesting should be done properly
+-attributes in XML
+
+Disadv - Difficult for end user to understand debug
+	-redundant syntax
+	-
+
+XML VS JSON
+
+
+
+JSON - is lightweight
+-> supports lot of data types 
+->package.json 
+-> JSON saves bandwidth
+
+
+
+XHR
+- object used to interact with servers
+
+- readyState - 
+ 0 -uninit
+1-loading (connection is open)
+2-loaded(request has been sent)
+3-response partially arrived
+4-completed (data has comletely arrived and connection has been closed)
+
+XHR doesnt maintain session history implicity 
+we have to explicitly store history of sesh
