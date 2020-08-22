@@ -34,3 +34,6 @@ XHR
 
 XHR doesnt maintain session history implicity 
 we have to explicitly store history of sesh
+
+ 
+WITH JSON sent or recieved from server we dont need header as it works seemlessly with js
