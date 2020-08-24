@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+    var obj = {
+        xhr: new XMLHttpRequest(),
+        getVideo: function () {
+            this.xhr.onload = this.showVideo;
+            this.xhr.responseType = "blob"; //default type is text (can be blob , json etc)
+            this.xhr.open("GET", "xhrBlob.php", true);
+            this.xhr.send();
+        },
+
+        showVideo: function () {
+            if (this.status == 200) {
+                let res = this.response;
+                let vid = document.createElement('video');
+                vid.controls = true;
+                const vidURL = URL.createObjectURL(res);
+                vid.src = vidURL;
+                document.body.appendChild(vid);
+            }
+
+        }
+    }
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="Play movie" id="" onclick="obj.getVideo()">
+
+
+
+</body>
+
+</html>
