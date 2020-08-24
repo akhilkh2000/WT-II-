@@ -16,6 +16,7 @@
                 let res = this.response;
                 let vid = document.createElement('video');
                 vid.controls = true;
+                // as the video src requires a URL we need to convert this object response to a url (like a false identity)
                 const vidURL = URL.createObjectURL(res);
                 vid.src = vidURL;
                 document.body.appendChild(vid);
