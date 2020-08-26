@@ -1,0 +1,6 @@
+-used for sage cross domain communication
+-ex - CDN's , public API's (IMDB,Github)
+-As long as server has agreed for CORS then we can access and defines rules on HOW we can access
+-server has to take care of security and attacks that might happen
+- server allows this using HTTP headers (mostly servers allow GET request access)
+-

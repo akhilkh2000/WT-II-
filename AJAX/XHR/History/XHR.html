@@ -3,6 +3,7 @@
     var count = 0;
     window.onpopstate = restore;
     function restore(e) {
+        //state here is the top element of the stack which we have pushed 
         var currState = e.state;
         document.getElementById("fname").value = currState.fname;
         document.getElementById("cs").value = currState.cs;
