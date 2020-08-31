@@ -1,0 +1,3 @@
+entry point is the getContent()function
+and only when user has scrolled through first 
+article , then others are loaded

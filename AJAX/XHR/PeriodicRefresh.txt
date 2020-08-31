@@ -1,0 +1,21 @@
+- Basically how does server inform user changes occurring on server
+- peridodic refresh - (auto update, polling , real-time, synchronize)
+-we need to keep the clients info in sync with the info on the server
+- ideally we would need 0 delay and latency time between server info and client info 
+
+-- objective must be to increase avg refresh period an
+-- Fallback patterns - when a server is down or is going thorugh issues
+   --  suppose we are still sending periodic requests every second , that may lead to server crash or latency errors so we need to :
+            - cancel pending requests 
+            - try again  based on timeout property (wait for the server for specified time)
+            - exponential backoff based on successful response 
+
+-- How long will refresh period will be ?
+    - three categories of activity level
+        1. Real time interaction (milliseconds) 
+            (info is time critical - Flights , scores)
+        2. Active monitoring (seconds)
+            (security desk of CCTV footage , every second refresh is fine as humans)
+        3. Casual monitoring(minutes)
+            (news sites etc , blogs )
+        4. Manual refresh based on refresh button

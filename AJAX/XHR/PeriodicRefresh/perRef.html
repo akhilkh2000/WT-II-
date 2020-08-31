@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+        var xhr =  new XMLHttpRequest();
+        function fetch(){
+            //generate and send xhr 
+            xhr.onload = show;
+            xhr.open("GET","perRef.php",true);
+            xhr.send();
+        }
+
+        function show(){
+            //
+            if(xhr.status == 200){
+                 let res = xhr.responseText;
+                 let resArray = res.split(";");
+                 let score1 = resArray[0];
+                 let score2 = resArray[1];
+                 let score3 = resArray[2];
+                 document.getElementById("team1").innerHTML = score1;
+                 document.getElementById("team2").innerHTML = score2;
+                 document.getElementById("team3").innerHTML = score3;
+
+                 document.getElementById("status").innerHTML += "..."
+
+                 setInterval(fetch,3000);
+
+            }
+        }
+
+    </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Refresh</title>
+    <style>
+        .score{
+            border: solid 4px blue;
+            height: 50px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body onload = "fetch()">
+    <div id="status">Updating...</div>
+    Team 1 <div id="team1" class="score"></div>
+    Team 2 <div id="team2" class="score"></div>
+    Team 3 <div id="team3" class="score"></div>
+    
+    
+</body>
+</html>
