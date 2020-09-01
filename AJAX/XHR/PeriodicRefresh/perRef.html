@@ -3,11 +3,11 @@
     <script>
         //fallback pattern : exponential backoff
         var xhr =  new XMLHttpRequest();
-        var n = 2;
+         n = 2;
         function fetch(){
             //generate and send xhr 
             xhr.onload = show;
-            xhr.timeout = 3000;
+            xhr.timeout = 4000;
             xhr.ontimeout = backoff;
             xhr.open("GET","perRef.php",true);
             xhr.send();
@@ -16,9 +16,7 @@
         function backoff(){
             console.log("Server is taking too long to respond!");
             //set a timeout to tell browser to sleep for a while
-            clearInterval(x);
             setTimeout(fetch,2*n*1000);
-            x = setInterval(fetch,2000);
             n*=2;
             console.log(n);
         }
@@ -37,7 +35,7 @@
 
                  document.getElementById("status").innerHTML += "..."
 
-                 var x = setInterval(fetch,1000);
+                  setTimeout(fetch,3000);
 
             }
         }
