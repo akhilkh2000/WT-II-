@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Throttling</title>
+<script>
+    //submission throttling
+    var xhr = new XMLHttpRequest();
+    function process(){
+        let input  = document.getElementById('userinput');
+        let res = document.getElementById('result');
+        xhr.open("GET","check.php?name="+input.value);
+        xhr.onload = function(){
+            if(xhr.status == 200){
+                res.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();
+    }
+</script>
+</head>
+<body onload="process()">
+    <h1>Enter your choice</h1>
+    <input type="text" name="userinput" id="userinput" onkeyup="process()">
+    <br>
+    <br>
+    <div id="result"></div>
+    
+</body>
+</html>
