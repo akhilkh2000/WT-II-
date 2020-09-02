@@ -6,8 +6,37 @@
     <title>Submission Throttling</title>
 <script>
     //submission throttling
+    //to reduce the number of requests that are sent to server and to reduce the number of requests handled by the browser
+    //balance : responsiveness and resource utilization
+    //data buffers(used by google suggest) - on client side to store data before sending 
+    //another way is using a command queue
+    //decision factors :
+    /*
+        1. timeout period - once this is reached send buffer stuff to server(also can keep collecting until user is idle)
+        2. length of buffer - once a threshold length is reached send to server
+        3. user idle time
+
+        *how many buffers can we have ?
+            example : blog 
+                3  buffers : 1. Low priority - (comments eg every 15 seconds)
+                             2. medium priority (every 3 secs - latest feed )
+                             3. High priority (every 0.2 seconds) Test buffer that gives you rest of your blog as you scroll
+
+        * how long should the throttle period be
+          -    
+
+     */
     var xhr = new XMLHttpRequest();
+    timer = false;
     function process(){
+        //only after very 1 second timeout is the request sent to the server
+        if(timer)
+            clearTimeout(timer); //so that every time it is one second timeout
+         timer = setTimeout(checkName,1000);
+        
+    }
+
+    function checkName(){
         let input  = document.getElementById('userinput');
         let res = document.getElementById('result');
         xhr.open("GET","check.php?name="+input.value);
