@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marvel</title>
+    <style>
+        #container{
+            border: solid 1px black;
+            display: none;
+        }
+        .marvelC{
+            background-color: grey;
+            color: black;
+        }
+        .marvelC:hover{
+            background-color: white;
+        }
+    </style>
+    <script>
+        class suggest{
+            constructor(){
+                var object = this;
+                this.timer = undefined; //to clear timeout
+                this.search = undefined;
+                this.container = undefined;
+                this.url = ""; //stores the url of the servers request
+                this.xhr = new XMLHttpRequest();
+
+            }
+
+            getTerm(){
+                this.search = document.getElementById('search');
+                this.container = document.getElementById('container');
+                if(this.timer){
+                    clearTimeout(this.timer);
+                } 
+                    this.timer = setTimeout(sendTerm,1000);
+            }
+
+        }
+        var obj = new suggest();
+    </script>
+</head>
+<body>
+    <table border="0" cellpadding = "0">
+        <tr>
+            <td></td>
+            <td><strong>Find all marvel Characters</strong></td>
+        </tr>
+        <tr>
+            <td>Enter a Name</td>
+            <td><input type="text" name="search" id="search" onkeypress="obj.getTerm()"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><div id="container"></div></td>
+        </tr>
+    </table>
+</body>
+</html>
