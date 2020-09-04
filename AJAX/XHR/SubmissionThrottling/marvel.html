@@ -38,6 +38,14 @@
                     this.timer = setTimeout(sendTerm,1000);
             }
 
+            sendTerm(){
+                this.url = "marvel.php?term="+this.search.value;
+
+                this.xhr.onload = this.showResult;
+                this.xhr.open("GET",this.url,true);
+                this.xhr.send();
+            }
+
         }
         var obj = new suggest();
     </script>
