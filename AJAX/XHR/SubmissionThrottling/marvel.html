@@ -28,8 +28,10 @@
                 outerThis.url = "marvel.php?term="+outerThis.search.value;
                 if(localStorage.getItem(outerThis.url)){
                     let cachedResult = JSON.parse(localStorage.getItem(outerThis.url));
+                    console.log(localStorage.getItem(outerThis.url));
+                    console.log("cached!");
                     outerThis.populateResult(cachedResult);
-                    console.log(localStorage.getItem(object.url));
+                    
                 } else{
                     console.log("server call", outerThis.search.value);
                     outerThis.xhr.onload = outerThis.showResult;
@@ -48,7 +50,7 @@
                     let res = this.responseText;
                     let resJson = JSON.parse(res);
                     //store in localStorage(emulated cache)
-                    localStorage.setItem(this.url,res);
+                    localStorage.setItem(obj.url,res);
                     obj.populateResult(resJson);
 
                 }
