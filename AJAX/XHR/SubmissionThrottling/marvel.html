@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>marvel</title>
-    <style>
-        #container{
-            border: solid 1px black;
-            display: none;
-        }
-        .marvelC{
-            background-color: grey;
-            color: black;
-        }
-        .marvelC:hover{
-            background-color: white;
-        }
-    </style>
     <script>
+    
         class suggest{
             constructor(){
                 var object = this;
@@ -31,24 +15,78 @@
 
             getTerm(){
                 this.search = document.getElementById('search');
+                console.log(this.search.value);
                 this.container = document.getElementById('container');
                 if(this.timer){
                     clearTimeout(this.timer);
                 } 
-                    this.timer = setTimeout(sendTerm,1000);
+                    this.timer = setTimeout(this.sendTerm(this),1000);
             }
 
-            sendTerm(){
-                this.url = "marvel.php?term="+this.search.value;
+            sendTerm(outerThis){
+              
+                outerThis.url = "marvel.php?term="+outerThis.search.value;
+                if(localStorage.getItem(outerThis.url)){
+                    let cachedResult = JSON.parse(localStorage.getItem(outerThis.url));
+                    outerThis.populateResult(cachedResult);
+                    console.log(localStorage.getItem(object.url));
+                } else{
+                    console.log("server call", outerThis.search.value);
+                    outerThis.xhr.onload = outerThis.showResult;
+                    outerThis.xhr.open("GET",outerThis.url,true);
+                    outerThis.xhr.send();
+                }
+                
+            }
+            //TODO
+            // showResult -> PopulateResult
+            //store results in localStorage(mimics a cache)
 
-                this.xhr.onload = this.showResult;
-                this.xhr.open("GET",this.url,true);
-                this.xhr.send();
+            showResult(){
+                if(this.status == 200){
+                    console.log(this.status);
+                    let res = this.responseText;
+                    let resJson = JSON.parse(res);
+                    //store in localStorage(emulated cache)
+                    localStorage.setItem(this.url,res);
+                    obj.populateResult(resJson);
+
+                }
             }
 
+            populateResult(resJson){
+                this.container.innerHTML = "";
+                for(let f in resJson){
+                    let item = document.createElement('div');
+                    item.innerHTML = resJson[f];
+                    item.style.className = "MarvelC";
+                    this.container.appendChild(item);
+                }
+                //making the container visible
+                this.container.style.display = "block";
+
+            }
         }
         var obj = new suggest();
     </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marvel</title>
+    <style>
+        #container{
+            border: solid 1px black;
+            display: none;
+        }
+        .MarvelC{
+            background-color: grey;
+            color: black;
+        }
+        .MarvelC:hover{
+            background-color: white;
+        }
+    </style>
+   
 </head>
 <body>
     <table border="0" cellpadding = "0">
@@ -58,7 +96,7 @@
         </tr>
         <tr>
             <td>Enter a Name</td>
-            <td><input type="text" name="search" id="search" onkeypress="obj.getTerm()"></td>
+            <td><input type="text" name="search" id="search" onkeyup="obj.getTerm()"></td>
         </tr>
         <tr>
             <td></td>
