@@ -1,0 +1,14 @@
+#LONG POLLING
+basically shifting control from client to server
+server push mechanism
+
+we will we use COMET techniques in which long held http request allows web server to push data to a browser
+- Makes a persistent HTTP connection
+- Whenever server gets the data it responds back to the client
+- here we keep the connection "alive" until response is given or network failure
+
+# streaming vs long POLLING
+- streaming -> hidden iframes and xhr obj (use only one xhr object and reuse it thruout the communication , timout techniques to look for events on the server)
+- long polling -> server allows almost 6 parallel connections 
+- how will you manage message queue, server failure, load balancing etc.
+- for long polling we need to develop our custom communication system 
