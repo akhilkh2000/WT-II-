@@ -1,7 +1,7 @@
 <?php
 //read the file
 $extract($_GET);
-set_time_limit(2); //if server doesnt respond in 2 seconds, (EMULATE FAILURE)
+set_time_limit(2); //if server doesnt respond in 2 seconds, the php script will stop running(EMULATE FAILURE)
 $data = fopen("data.txt", "r");
 $res = array(); //latest time stamp and contents of the file only if time stamo is new
 
@@ -12,7 +12,7 @@ while (true) {
     //stat() and lstat() derived functions are cached by php
     // so this filemtime functions caches the last modified data and we need to clear cache so that we get the correct result
 
-    clearstatcache(); //clear previous info 
+    clearstatcache(); //clear previous info timestamp and stuff
     $last_mod = filemtime("data.txt"); //last modified timestamp in milli
     if ($last_mod > $timestamp) {
         //if timestamp is new  : send info back to client

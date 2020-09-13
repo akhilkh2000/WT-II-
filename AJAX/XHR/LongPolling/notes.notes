@@ -1,6 +1,9 @@
 #LONG POLLING
+#COMET  - Comet is a web application model in which a long-held HTTPS request allows a web server to push data to a browser, without the browser explicitly requesting it.
 basically shifting control from client to server
 server push mechanism
+basically keep the connection active until we get response from server and dont bombard requests to the server 
+
 
 we will we use COMET techniques in which long held http request allows web server to push data to a browser
 - Makes a persistent HTTP connection

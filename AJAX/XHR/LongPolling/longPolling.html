@@ -11,6 +11,8 @@
                 this.xhr.onreadystatechange = this.showData;
                 console.log("send : ",timestamp);
                 this.xhr.open("GET","sample.php?timestamp="+this.timestamp,true);
+                this.xhr.send();
+
             },
             showData : function(){
                 if(this.readyState == 4 && this.status == 200){
