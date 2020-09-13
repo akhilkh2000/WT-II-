@@ -15,3 +15,6 @@ we will we use COMET techniques in which long held http request allows web serve
 - long polling -> server allows almost 6 parallel connections 
 - how will you manage message queue, server failure, load balancing etc.
 - for long polling we need to develop our custom communication system 
+
+#Piggyback pollingPiggyback
+With the piggyback option, the server, having an update to send, waits for the next time the browser makes a connection and then sends it's update along with the response that the browser was expecting.
