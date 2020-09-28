@@ -33,5 +33,5 @@ fs.open("notes.txt", "r+", function (err, fd) {
 //fs.writeFileSync("notes.txt", "this was created by node.js!");
 fs.unlink("notes.txt", function (err) {
 	if (err) console.log(err);
-	else console.log("deleted file");
+	else console.log("del eted file");
 });

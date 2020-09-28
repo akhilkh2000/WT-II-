@@ -1,0 +1,17 @@
+# streams
+-  nodejs works on the event loop concept so whenever we have a stream being populated etc etc
+    we should fire an event to let it know that an appropriate task needs to be done
+-  data event in stream 
+- finish event 
+- end event  
+
+- tcp sockets have readbale and writable streams 
+- concept of piping in stream 
+- chaining streams (output of one stream is input of other)
+
+- every event is emitted and there is a listener to listen for  events
+
+- read events -> 1. data , 2. end , 3. error
+- write events -> 1.finish, 2. error
+
+# streams ARE ASYNC 
