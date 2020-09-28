@@ -76,3 +76,10 @@ readerStream
 	.pipe(zlib.createGzip())
 	.pipe(fs.createWriteStream("notes.txt.gzip"));
 console.log("ended program");
+
+//unzip
+var readerStream = fs.createReadStream("notes.txt.gzip");
+readerStream
+	.pipe(zlib.createGunzip())
+	.pipe(fs.createWriteStream("unzipped.txt"));
+console.log("unzipped!");
