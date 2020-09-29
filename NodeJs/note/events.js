@@ -56,12 +56,13 @@ function processor(n) {
 	return this;
 }
 
+//if we dont use setTimeout and keep a delay above the events will be emitted before they can be captured by the event handlers
 util.inherits(processor, emitter); //(child, parent)
 
 var pro = new processor(3); //create object of processor constructor
 pro.on("before", (data) => {
 	console.log("starting process:" + data);
-});
+}); 
 
 pro.on("after", (data) => {
 	console.log("ending process:" + data);

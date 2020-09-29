@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script>
+        function fetchData(){
+
+        const myImage = document.getElementById('img');
+        fetch("https://images.unsplash.com/photo-1461800919507-79b16743b257?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80")
+        .then(res => res.blob())
+        .then(res =>{
+            const objUrl = URL.createObjectURL(res);
+            myImage.src = objUrl;
+        });
+        }
+        
+
+    </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <button onclick="fetchData()">Fetch Image</button>
+     <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80" alt="" id="img">
+</body>
+</html>
+
+
