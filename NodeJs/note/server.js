@@ -1,7 +1,7 @@
 //http module creating a web server
-const http = require("http");
-const fs = require("fs");
-const url = require("url"); //to break url into parts and functions related
+var http = require("http");
+var fs = require("fs");
+var url = require("url"); //to break url into parts and functions related
 
 //create server
 http
