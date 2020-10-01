@@ -9,19 +9,31 @@ http
 		var pathname = url.parse(req.url).pathname;
 		console.log("received request for pathname" + pathname);
 		if (req.method == "GET") {
-			fs.readFile(pathname.substr(1), (err, data) => {
-				if (err) {
-					console.log(err);
-					res.writeHead(404, { "Content-Type": "text/html" });
-				} else {
-					console.log("success");
-					res.writeHead(200, { "Content-Type": "text/html" });
-					res.write(data.toString()); // this is the response that will be displayed
+			console.log("executing mongo");
+			// connect to mongodb
+			MongoClient.connect(
+				"mongodb://localhost:27017",
+				{ useUnifiedTopology: true },
+				(err, client) => {
+					if (err) {
+						console.log("error connecting to DB");
+					} else {
+						console.log("connected to DB!");
+						const db = client.db("pes");
+						db.collection("students")
+							.find({})
+							.toArray({
+								function(err, docs) {
+									//all documents peratining to the collection are returned in form of array
+									res.writeHead(200, { "Content-Type": "application/json" });
+									res.write(JSON.stringify(docs));
+									client.close();
+									res.end(); //send to client
+								},
+							});
+					}
 				}
-
-				//send to client and end the response
-				res.end();
-			});
+			);
 		} else {
 			//request is a POST request
 			let body = [];
