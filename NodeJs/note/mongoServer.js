@@ -22,14 +22,13 @@ http
 						const db = client.db("pes");
 						db.collection("students")
 							.find({})
-							.toArray({
-								function(err, docs) {
-									//all documents peratining to the collection are returned in form of array
-									res.writeHead(200, { "Content-Type": "application/json" });
-									res.write(JSON.stringify(docs));
-									client.close();
-									res.end(); //send to client
-								},
+							.toArray(function (err, docs) {
+								//all documents peratining to the collection are returned in form of array
+								if (err) console.log(err);
+								res.writeHead(200, { "Content-Type": "application/json" });
+								res.write(JSON.stringify(docs));
+								client.close();
+								res.end(); //send to client
 							});
 					}
 				}
@@ -46,11 +45,33 @@ http
 					//make it in string form
 					body = Buffer.concat(body).toString();
 				});
-			//write to JSON file
-			fs.writeFile(pathname.substr(1), body, (err, resp) => {
-				res.writeHead(200, { "Content-Type": "text/html" });
-				res.end();
-			});
+			//write to DB
+			console.log("executing mongo");
+			// connect to mongodb
+			MongoClient.connect(
+				"mongodb://localhost:27017",
+				{ useUnifiedTopology: true },
+				(err, client) => {
+					if (err) {
+						console.log("error connecting to DB");
+					} else {
+						console.log("connected to DB!");
+						const db = client.db("pes");
+						db.collection("students")
+							.insertOne(JSON.parse(body))
+							.then((r) => {
+								console.log(r);
+								res.writeHead(200, { "Content-Type": "application/json" });
+								client.close();
+								res.end();
+							});
+					}
+				}
+			);
+			// fs.writeFile(pathname.substr(1), body, (err, resp) => {
+			// 	res.writeHead(200, { "Content-Type": "text/html" });
+			// 	res.end();
+			// });
 		}
 	})
 	.listen(5000);

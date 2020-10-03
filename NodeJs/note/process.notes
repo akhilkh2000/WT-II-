@@ -1,0 +1,3 @@
+# PROCESS AND CHILD PROCESS NODE
+- node uses round robin to schedule worker processes 
+- all worker processes will share the same server port
