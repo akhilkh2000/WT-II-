@@ -1,0 +1,32 @@
+# features of node
+-> Non blocking
+-> Event driven
+-> Data intensive
+-> I/O intensive
+
+Nodejs is single threaded . Does not have worker threads like java
+We have a single thread that runs thru a queue of events.
+(EVENT queue)
+
+->Event loop 
+-> it has a single threaded model working on the concept of callbacks
+-> Basically when a network call is made the thread does not sit and wait for it to return , in
+in turn we pass a callback function to be executed when the network call returns a value,
+so basically this thread proceeds down the event queue and whenever
+the network call returns it remembers OOH I had to call this callback funtion when network call returned so it puts this callback function in the event queue
+
+## WHEN WE SAY NODEJS IS SINGLE THREADED WE MEAN THERE IS A SINGLE APPLICATION THREAD.
+-> The nodejs app sits on top of the runtime (libuv) which are implemented in c++. This runtime is mostly multi threaded internally so it actually ends up using your CPU's multi threading capacity
+
+#DRAWBACK
+If an event or task is internally extensive or CPU intensive not external intensive , it cant pass on to the next event as it is NODEJS that has to perform that process and not some external API.
+
+#Best applications of Nodejs
+- Web servers (as it's external)
+- Real time servers (Web socket conccurent connections , nodejs manages these using the async event loop) 
+- API's fronting NoSQL DB 
+- Command line utilities
+- Build tooling
+
+# BIG NO NO
+- CPU intensive tasks
