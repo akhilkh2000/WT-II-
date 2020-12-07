@@ -1,7 +1,7 @@
 <?php
-//read the file
-$extract($_GET);
-set_time_limit(2); //if server doesnt respond in 2 seconds, the php script will stop running(EMULATE FAILURE)
+//read a file
+extract($_GET);
+// set_time_limit(2); //if server doesnt respond in 2 seconds, the php script will stop running(EMULATE FAILURE)
 $data = fopen("data.txt", "r");
 $res = array(); //latest time stamp and contents of the file only if time stamo is new
 
@@ -23,5 +23,6 @@ while (true) {
         break;
     } else {
         sleep(1); // to give a COFFEE break to the server 
+        continue;
     }
 }

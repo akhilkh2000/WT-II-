@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    timer = null;
+    obj = {
+        monitor : function(){
+            //monitors the server , makes connection using iframe
+            console.log("In monitor..");
+            iframe = document.getElementById('ifr');
+            iframe.src = "test.php"; //calls test.php
+
+        },
+
+        updateDiv: function(str){ //called by php (str ->response from server)
+            console.log("in update");
+            newdiv = document.createElement('div');
+            newdiv.innerHTML = str;
+            document.body.appendChild(newdiv);
+            obj.monitor(); //when updated the connection closes and has to be called again to make another connection wiht the server
+
+        },
+
+        heartbeat : function(){
+            if(timer)
+            clearTimeout(timer);
+            else{
+                console.log("in heartbeat");
+                timer = setTimeout(this.monitor,1000);
+            }
+        }
+    }
+</script>
+<body>
+    <input type="button" value="Click to monitor" onclick="obj.monitor()">
+    <br>
+    <iframe id="ifr" frameborder="0" style="display: none;"></iframe>
+    
+</body>
+</html>

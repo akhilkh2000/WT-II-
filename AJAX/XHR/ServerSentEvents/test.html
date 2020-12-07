@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+var obj = {
+    recieve: function(){
+        //create event source
+        var es = new EventSource('test.php'); 
+        //listeners
+        es.addEventListener('data',obj.showData,false);
+        es.addEventListener('end',obj.end,false);
+
+    },
+
+    showData: function(e){
+        console.log(e.data);
+    },
+    end: function(e){
+        console.log(e.data);
+    }
+}
+</script>
+<body>
+    <button onclick="obj.recieve()">Start recieving events</button>
+    
+</body>
+</html>

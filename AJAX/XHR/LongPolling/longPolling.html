@@ -4,35 +4,35 @@
         we will use timestamp here . So the text file on the server side. Whenever we modify teh text file the timestamp is updated and we compare with our latest timestamp and based on that we check if any new info needs to be sent to the client
      -->
     <script>
-        var obj ={
+   var obj ={
             timestamp : 0,
             xhr : new XMLHttpRequest(),
             getdata : function(timestamp){
                 this.xhr.onreadystatechange = this.showData;
-                console.log("send : ",timestamp);
-                this.xhr.open("GET","sample.php?timestamp="+this.timestamp,true);
+                console.log("send : ",obj.timestamp);
+                this.xhr.open("GET","sample.php?timestamp="+obj.timestamp,true);
                 this.xhr.send();
 
             },
             showData : function(){
                 if(this.readyState == 4 && this.status == 200){
                     //terminate the connection and restart connection
-                    let res = this.responseText;
+                    var res = this.responseText;
                     //if server error the fatal key in response is set to > -1
-                    if(this.responseText.indexOf("Fatal") >-1){
+                    if(this.responseText.indexOf("Fatald") >-1){
                         console.log("readyState before abort:", this.readyState);
                         this.abort(); //resets state = 0
                         console.log("After abort ReadyState:" +this.readyState);
                         //open a new connection to the server
-                        this.getdata(this.timestamp);
+                        obj.getdata();
                     } else{
-                        let resJson = JSON.parse(res);
+                        var resJson = JSON.parse(res);
                         document.getElementById('content').innerHTML = resJson.r;
                         //update the timestamp
-                        this.timestamp = resJson.t;
-                        console.log("new timestamp :" , this.timestamp); 
+                        obj.timestamp = resJson.t;
+                        console.log("new timestamp :" , obj.timestamp); 
                         this.abort();   //end connection     
-                        this.getdata(this.timestamp);
+                        obj.getdata(obj.timestamp);
                     }
                 }
             }
@@ -43,7 +43,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Long Polling</title>
 </head>
-<body onload="obj.getdata(obj.timestamp)">
+<body onload="obj.getdata()">
     <div id="content"></div>
     
 </body>

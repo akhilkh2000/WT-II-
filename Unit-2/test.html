@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .score{
+            border: solid 4px orange;
+            height: 100px;
+            width: 300px;
+        }
+    </style>
+    <script>
+        n = 2;
+        xhr = new XMLHttpRequest();
+        sleep = 0;
+        function fetch(){
+            xhr.onload = show;
+            xhr.timeout = 4000;
+            xhr.ontimeout = backoff;
+            xhr.open("GET","test.php?sleep="+sleep,true);
+            sleep++;
+            xhr.send();
+        }
+
+        function show(){
+            var res = xhr.responseText;
+            var resArr = res.split(';');
+            document.getElementById("team1").innerHTML = resArr[0];
+            document.getElementById("team2").innerHTML = resArr[1];
+            document.getElementById("team3").innerHTML = resArr[2];
+            setTimeout(fetch,3000); //poll the server with 3 sec interval
+
+        }
+
+        function backoff(){
+            console.log("backing off..");
+            setTimeout(fetch,2*n*1000);
+            n = n*2;
+            console.log("The value of n is ",n);
+
+        }
+    </script>
+</head>
+<body onload="fetch()">
+    <div> Updating ...</div>
+    Team1: RR <div id="team1" class="score"></div>
+    Team1: RCB <div id="team2" class="score"></div>
+    Team1: CSK <div id="team3" class="score"></div>
+
+    
+</body>
+</html>
