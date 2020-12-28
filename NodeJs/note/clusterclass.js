@@ -31,6 +31,7 @@ if (cluster.isMaster) {
 			res.writeHead(200);
 			res.end("Process" + process.pid + "says hi");
 			console.log("process" + process.pid + "handled the request");
+			cluster.worker.disconnect(); // to close process
 		})
 		.listen(5000);
 }
